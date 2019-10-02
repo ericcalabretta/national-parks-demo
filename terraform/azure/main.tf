@@ -1,5 +1,5 @@
 terraform {
-  required_version = "> 0.11.00"
+  required_version = "~> 0.11"
 }
 
 # Configure the Microsoft Azure Provider
@@ -435,6 +435,7 @@ resource "azurerm_virtual_machine" "permanent-peer" {
       "chmod +x /tmp/install_hab.sh",
       "sudo /tmp/install_hab.sh",
       "sudo hab license accept",
+      "sudo hab pkg install ${var.hab-sup-version}",
       "sudo mv /home/${var.azure_image_user}/hab-sup.service /etc/systemd/system/hab-sup.service",
       "sudo systemctl daemon-reload",
       "sudo systemctl start hab-sup",
@@ -543,6 +544,7 @@ resource "azurerm_virtual_machine" "mongodb" {
       "chmod +x /tmp/install_hab.sh",
       "sudo /tmp/install_hab.sh",
       "sudo hab license accept",
+      "sudo hab pkg install ${var.hab-sup-version}",
       "sudo mv /home/${var.azure_image_user}/hab-sup.service /etc/systemd/system/hab-sup.service",
       "sudo systemctl daemon-reload",
       "sudo systemctl start hab-sup",
@@ -555,7 +557,7 @@ resource "azurerm_virtual_machine" "mongodb" {
       "sudo cp /home/${var.azure_image_user}/mongo.toml /hab/user/mongodb/config/user.toml",
       "sudo hab svc load effortless/audit-baseline --channel stable --strategy at-once --group ${var.group}",
       "sudo hab svc load effortless/config-baseline --channel stable --strategy at-once --group ${var.group}",
-      "sudo hab svc load core/mongodb --group ${var.group}"
+      "sudo hab svc load core/mongodb/3.2.10/20171016003652 --group ${var.group}"
     ]
   }
 
@@ -647,6 +649,7 @@ resource "azurerm_virtual_machine" "app" {
       "chmod +x /tmp/install_hab.sh",
       "sudo /tmp/install_hab.sh",
       "sudo hab license accept",
+      "sudo hab pkg install ${var.hab-sup-version}",
       "sudo mv /home/${var.azure_image_user}/hab-sup.service /etc/systemd/system/hab-sup.service",
       "sudo systemctl daemon-reload",
       "sudo systemctl start hab-sup",
@@ -755,6 +758,7 @@ resource "azurerm_virtual_machine" "haproxy" {
       "chmod +x /tmp/install_hab.sh",
       "sudo /tmp/install_hab.sh",
       "sudo hab license accept",
+      "sudo hab pkg install ${var.hab-sup-version}",
       "sudo mv /home/${var.azure_image_user}/hab-sup.service /etc/systemd/system/hab-sup.service",
       "sudo systemctl daemon-reload",
       "sudo systemctl start hab-sup",
