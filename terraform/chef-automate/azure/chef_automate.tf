@@ -24,11 +24,6 @@ locals {
   ip_conf_name = "automate-ipconfig"
 }
 
-resource "azurerm_subnet_network_security_group_association" "automate" {
-  subnet_id                 = azurerm_subnet.subnet.id
-  network_security_group_id = azurerm_network_security_group.sg.id
-}
-
 resource "azurerm_network_interface" "automate_nic" {
   name                      = "chef-automate-${random_id.instance_id.hex}-nic"
   location                  = azurerm_resource_group.rg.location
@@ -88,7 +83,7 @@ resource "azurerm_virtual_machine" "chef_automate" {
   delete_os_disk_on_termination = true
 
   connection {
-    host        = "" # TF-UPGRADE-TODO: Set this to the IP address of the machine's primary network interface
+    host        = azurerm_public_ip.automate_pip.ip_address # TF-UPGRADE-TODO: Set this to the IP address of the machine's primary network interface
     type        = "ssh"
     user        = var.azure_image_user
     private_key = file(var.azure_private_key_path)

@@ -7,32 +7,26 @@ variable "azure_region" {
 }
 
 variable "azure_sub_id" {
-  default     = "xxxxxxx-xxxx-xxxx-xxxxxxxxxx"
   description = "The Azure subscription ID for your account"
 }
 
 variable "azure_tenant_id" {
-  default     = "xxxxxxx-xxxx-xxxx-xxxxxxxxxx"
   description = "Azure tenant ID for your tenant"
 }
 
 variable "azure_client_id" {
-  default     = "xxxxxxx-xxxx-xxxx-xxxxxxxxxx"
   description = "Azure client ID for your client"
 }
 
 variable "azure_client_secret" {
-  default     = "xxxxxxx-xxxx-xxxx-xxxxxxxxxx"
   description = "Azure client secret for your client"
 }
 
 variable "azure_public_key_path" {
-  default     = "/path/to/ssh/key"
   description = "Public key for SSH configuration to instances"
 }
 
 variable "azure_private_key_path" {
-  default     = "/path/to/ssh/key"
   description = "Private key that corresponds to azure_public_key_path"
 }
 
@@ -78,10 +72,9 @@ variable "azure_image_password" {
   description = "Password for azurerm_image_user"
 }
 
-variable "origin" {
-  default     = ""
-  description = "Habitat package origin"
-}
+// variable "origin" {
+//   description = "Habitat package origin"
+// }
 
 ////////////////////////////////
 // Chef Automate
